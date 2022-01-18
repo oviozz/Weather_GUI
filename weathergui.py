@@ -23,14 +23,14 @@ def getWeather(window):
 
         y = re.findall('[A-Z][^A-Z]*', info)
         x = ''
-        for i in y[0:2]:
+        for i in y[0:3]:
             x = x + i + '\n'
 
         # returning the data to label to print in the window(screen)
         label.config(text=location)
         label0.config(text=time)
         label1.config(text=temp + ' °F')
-        label2.config(text=x)
+        label2.config(text=x[:-7])
 
     except AttributeError:
         label0.config(text='Invalid Location')
