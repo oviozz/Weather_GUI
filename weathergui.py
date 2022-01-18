@@ -34,6 +34,9 @@ def getWeather(window):
 
     except AttributeError:
         label0.config(text='Invalid Location')
+        label.config(text='')
+        label1.config(text='')
+        label2.config(text='')
 
 #initial start
 window = tk.Tk()
