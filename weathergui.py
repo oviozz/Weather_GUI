@@ -17,9 +17,12 @@ def getWeather(window):
         url = requests.get('https://www.google.com/search?q={}+weather'.format(city), headers=headers).text
         soup = BeautifulSoup(url, 'lxml')
         location = soup.find('div',class_='wob_loc q8U8x').text
+        global temp
         temp = soup.find('span', class_='wob_t q8U8x').text
         info = soup.find('div', class_='wtsRwe').text
         time = soup.find('div', class_='wob_dts').text
+        global celc
+        celc = soup.find('span',id='wob_ttm').text
 
         y = re.findall('[A-Z][^A-Z]*', info)
         x = ''
@@ -31,12 +34,28 @@ def getWeather(window):
         label0.config(text=time)
         label1.config(text=temp + ' °F')
         label2.config(text=x[:-7])
+        firstButton = tk.Button(text="Convert to °C", command=ChangetoCButton)
+        firstButton.place(x=380, y=235)
+        secondButton = tk.Button(text="Convert to °F", command=CtoF)
+        secondButton.place(x=480, y=235)
+
+
+
 
     except AttributeError:
         label0.config(text='Invalid Location')
         label.config(text='')
         label1.config(text='')
         label2.config(text='')
+
+
+
+def ChangetoCButton():
+    label1.config(text=celc + ' °C' )
+
+def CtoF():
+    label1.config(text=temp + ' °F' )
+
 
 #initial start
 window = tk.Tk()
@@ -57,6 +76,8 @@ weather_title.config(font=t)
 # spaces out the title
 weather_title.pack()
 
+
+
 # Creates a text field title
 textfield = tk.Entry(window, font=font_size)
 # Creates a space
@@ -65,6 +86,7 @@ textfield.pack(pady=30)
 textfield.focus()
 # checks if pressed return, to get the function(getweather)
 textfield.bind('<Return>', getWeather)
+
 
 
 #from the function it takes in the value/data
@@ -79,6 +101,8 @@ label1.pack()
 
 label2 = tk.Label(window, font=font_size)
 label2.pack()
+
+
 
 # Label By: Prajwal
 by = tk.Label(window, text='By: Prajwal!')
