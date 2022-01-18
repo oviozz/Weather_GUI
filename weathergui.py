@@ -35,9 +35,9 @@ def getWeather(window):
         label1.config(text=temp + ' °F')
         label2.config(text=x[:-7])
         firstButton = tk.Button(text="Convert to °C", command=ChangetoCButton)
-        firstButton.place(x=380, y=235)
+        firstButton.place(x=450, y=215)
         secondButton = tk.Button(text="Convert to °F", command=CtoF)
-        secondButton.place(x=480, y=235)
+        secondButton.place(x=450, y=245)
 
 
 
